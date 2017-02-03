@@ -2,12 +2,41 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Welcome{% endblock %}</title>
+
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        <div class="container">
+            {% block header %}
+                <div id="wrapper">
+                    <div id="container">
+                        <div id="welcome">
+                            <h1><span>Zarządzanie koszykiem zakupowym</span></h1>
+                        </div>
+                        <div id="next">
+                            <p><a href=" {{ path('app_product_list') }}">Lista produktów</a></p>
+                            <p><a href=" {{ path('app_product_basket') }}">Koszyk zakupowy</a></p>
+                            <p><a href=" {{ path('app_product_clearbasket') }}">Czyszczenie koszyka</a></p>
+                        </div>
+                        {% for type in ['success', 'danger'] %}
+                            {% for flashMessage in app.session.flashbag.get('success') %}
+                                <div class="alert alert-{{ type }}" role="alert">
+                                    {{ flashMessage }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endblock %}
+
+            {% block body %}
+
+            {% endblock %}
+        </div>
+            <script type="text/javasript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>

@@ -1,7 +1,34 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Product:basket{% endblock %}
+{% block title %}Koszyk zakupowy{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Product:basket page</h1>
+<h1>Koszyk zakupowy</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nazwa</th>
+                <th>Cena</th>
+                <th>Ilość</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.quantity }}</td>
+                <td><a class="btn btn-warning" href="{{ path('app_product_removefromcart', {'id': product.id }) }}">Usuń z  koszyka</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Koszyk jest pusty</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
+
